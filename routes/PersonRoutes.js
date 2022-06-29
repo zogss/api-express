@@ -45,7 +45,7 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/:id', async (req, res) =>{
-    console.log(req)
+    //console.log(req)
 
     // extrair o dado da requisição
     const id = req.params.id
@@ -88,6 +88,28 @@ router.patch('/:id', async (req, res) => {
         res.status(200).json(person)
     } catch (error) {
         res.status(500).json({error:error})
+    }
+})
+
+// DELETE - deletar dados
+router.delete('/:id', async (req, res) => {
+    const id = req.params.id
+
+    const person = await Person.findOne({ _id:id })
+
+    if(!person){
+        res.status(422).json({ message: 'O usuário não foi encontrado! '})
+        return
+    }
+
+    try {
+
+        await Person.deleteOne({ _id:id })
+
+        res.status(200).json({ message: 'O usuário foi removido com sucesso! '})
+
+    } catch (error){
+        res.status(500).jason({ error:error })
     }
 })
 

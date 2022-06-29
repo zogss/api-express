@@ -27,9 +27,6 @@ app.get('/', (req, res)=>{
 });
 
 // entregar uma porta ao express para ter acesso ao codigo
-const DB_USER = 'matheus'
-const DB_PASSWORD = encodeURIComponent('FsMOMhMpVk9Al9UE') 
-
 mongoose
     .connect(process.env.DB_LINK)
     .then(()=>{
